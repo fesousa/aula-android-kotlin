@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import kotlinx.android.synthetic.main.activity_tela_inicial.*
 
 class TelaInicialActivity : DebugActivity() {
 
@@ -27,16 +28,14 @@ class TelaInicialActivity : DebugActivity() {
         Toast.makeText(context, "Parâmetro: $nome", Toast.LENGTH_LONG).show()
         Toast.makeText(context, "Numero: $numero", Toast.LENGTH_LONG).show()
 
-        val mensagem = findViewById<TextView>(R.id.mensagemInicial)
-        mensagem.text = "Bem vindo $nome"
+        mensagemInicial.text = "Bem vindo $nome"
 
-        val botaoSair = findViewById<Button>(R.id.botaoSair)
         botaoSair.setOnClickListener {cliqueSair()}
     }
 
     fun cliqueSair() {
         val returnIntent = Intent();
-        returnIntent.putExtra("result","Saída do BrewerApp");
+        returnIntent.putExtra("result","Saída do LMSApp");
         setResult(Activity.RESULT_OK,returnIntent);
         finish();
     }
