@@ -1,6 +1,8 @@
 package br.com.fernandosousa.lmsapp
 
 import android.content.Context
+import android.util.Log
+import android.widget.Toast
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
@@ -8,26 +10,17 @@ object DisciplinaService {
 
     //TROQUE PELA URL DE ONDE ESTÁ O WS
     // Veja um exemplo no repositório https://github.com/fesousa/aula-android-kotlin-api
-    val host = "http://urldoseuservico.com.br"
+    val host = "https://urldoseuservico.com.br"
     val TAG = "WS_LMSApp"
 
     fun getDisciplinas (context: Context): List<Disciplina> {
-        var disciplinas = ArrayList<Disciplina>()
         if (AndroidUtils.isInternetDisponivel(context)) {
             val url = "$host/disciplinas"
             val json = HttpHelper.get(url)
-            disciplinas = parserJson(json)
-            // salvar offline
-            for (d in disciplinas) {
-                saveOffline(d)
-            }
-            return disciplinas
+            return parserJson(json)
         } else {
-            val dao = DatabaseManager.getDisciplinaDAO()
-            val disciplinas = dao.findAll()
-            return disciplinas
+            return ArrayList<Disciplina>()
         }
-
     }
 
     fun save(disciplina: Disciplina): Response {
@@ -35,34 +28,12 @@ object DisciplinaService {
         return parserJson(json)
     }
 
-    fun saveOffline(disciplina: Disciplina) : Boolean {
-        val dao = DatabaseManager.getDisciplinaDAO()
-
-        if (! existeDisciplina(disciplina)) {
-            dao.insert(disciplina)
-        }
-
-        return true
-
-    }
-
-    fun existeDisciplina(disciplina: Disciplina): Boolean {
-        val dao = DatabaseManager.getDisciplinaDAO()
-        return dao.getById(disciplina.id) != null
-    }
-
     fun delete(disciplina: Disciplina): Response {
-        if (AndroidUtils.isInternetDisponivel(LMSApplication.getInstance().applicationContext)) {
-            val url = "$host/disciplinas/${disciplina.id}"
-            val json = HttpHelper.delete(url)
-
-            return parserJson(json)
-        } else {
-            val dao = DatabaseManager.getDisciplinaDAO()
-            dao.delete(disciplina)
-            return Response(status = "OK", msg = "Dados salvos localmente")
-        }
-
+        Log.d(TAG, disciplina.id.toString())
+        val url = "$host/disciplinas/${disciplina.id}"
+        val json = HttpHelper.delete(url)
+        Log.d(TAG, json)
+        return parserJson(json)
     }
 
     inline fun <reified T> parserJson(json: String): T {
