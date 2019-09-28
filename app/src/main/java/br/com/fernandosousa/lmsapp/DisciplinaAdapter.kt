@@ -9,6 +9,7 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import com.squareup.picasso.Picasso
+import  kotlinx.android.synthetic.main.adapter_disciplina.*
 
 // define o construtor que recebe a lista de disciplinas e o evento de clique
 class DisciplinaAdapter (
