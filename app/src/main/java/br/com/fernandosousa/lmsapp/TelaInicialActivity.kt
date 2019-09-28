@@ -15,6 +15,8 @@ import android.support.v7.widget.SearchView
 import android.support.v7.widget.Toolbar
 import android.widget.TextView
 import android.widget.Toast
+import kotlinx.android.synthetic.main.activity_tela_inicial.*
+import kotlinx.android.synthetic.main.toolbar.*
 
 class TelaInicialActivity : DebugActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -36,14 +38,11 @@ class TelaInicialActivity : DebugActivity(), NavigationView.OnNavigationItemSele
         Toast.makeText(context, "Parâmetro: $nome", Toast.LENGTH_LONG).show()
         Toast.makeText(context, "Numero: $numero", Toast.LENGTH_LONG).show()
 
-        val mensagem = findViewById<TextView>(R.id.mensagemInicial)
-        mensagem.text = "Bem vindo $nome"
+        mensagemInicial.text = "Bem vindo $nome"
 
-        val botaoSair = findViewById<Button>(R.id.botaoSair)
         botaoSair.setOnClickListener {cliqueSair()}
 
         // colocar toolbar
-        var toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
 
 
@@ -59,17 +58,13 @@ class TelaInicialActivity : DebugActivity(), NavigationView.OnNavigationItemSele
 
     // configuração do navigation Drawer com a toolbar
     private fun configuraMenuLateral() {
-        var toolbar = findViewById<Toolbar>(R.id.toolbar)
-        var menuLateral = findViewById<DrawerLayout>(R.id.layourMenuLateral)
+         // ícone de menu (hamburger) para mostrar o menu
+        var toogle = ActionBarDrawerToggle(this, layoutMenuLateral, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
 
-        // ícone de menu (hamburger) para mostrar o menu
-        var toogle = ActionBarDrawerToggle(this, menuLateral, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
-
-        menuLateral.addDrawerListener(toogle)
+        layoutMenuLateral.addDrawerListener(toogle)
         toogle.syncState()
 
-        val navigationView = findViewById<NavigationView>(R.id.menu_lateral)
-        navigationView.setNavigationItemSelectedListener(this)
+        menu_lateral.setNavigationItemSelectedListener(this)
     }
 
     // método que deve ser implementado quando a activity implementa a interface NavigationView.OnNavigationItemSelectedListener
@@ -98,8 +93,7 @@ class TelaInicialActivity : DebugActivity(), NavigationView.OnNavigationItemSele
         }
 
         // fecha menu depois de tratar o evento
-        val drawer = findViewById<DrawerLayout>(R.id.layourMenuLateral)
-        drawer.closeDrawer(GravityCompat.START)
+        layoutMenuLateral.closeDrawer(GravityCompat.START)
         return true
     }
 
