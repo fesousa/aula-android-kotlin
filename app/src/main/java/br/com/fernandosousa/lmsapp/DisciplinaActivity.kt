@@ -9,6 +9,8 @@ import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.TextView
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_disciplina.*
+import kotlinx.android.synthetic.main.toolbar.*
 
 class DisciplinaActivity : DebugActivity() {
 
@@ -23,7 +25,6 @@ class DisciplinaActivity : DebugActivity() {
 
         // configurar título com nome da Disciplina e botão de voltar da Toobar
         // colocar toolbar
-        var toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
 
         // alterar título da ActionBar
@@ -32,11 +33,9 @@ class DisciplinaActivity : DebugActivity() {
         // up navigation
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        // atualizar dados do carro
-        var texto = findViewById<TextView>(R.id.nomeDisciplina)
-        texto.text = disciplina?.nome
-        var imagem = findViewById<ImageView>(R.id.imagemDisciplina)
-        Picasso.with(this).load(disciplina?.foto).fit().into(imagem,
+        // atualizar dados da disciplina
+        nomeDisciplina.text = disciplina?.nome
+        Picasso.with(this).load(disciplina?.foto).fit().into(imagemDisciplina,
                 object: com.squareup.picasso.Callback{
                     override fun onSuccess() {}
 

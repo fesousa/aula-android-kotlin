@@ -12,12 +12,13 @@ import android.support.v7.widget.*
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import kotlinx.android.synthetic.main.activity_tela_inicial.*
+import kotlinx.android.synthetic.main.toolbar.*
 
 class TelaInicialActivity : DebugActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private val context: Context get() = this
     private var disciplinas = listOf<Disciplina>()
-    var recyclerDisciplinas: RecyclerView? = null
     private var REQUEST_CADASTRO = 1
     private var REQUEST_REMOVE= 2
 
@@ -39,7 +40,6 @@ class TelaInicialActivity : DebugActivity(), NavigationView.OnNavigationItemSele
         //Toast.makeText(context, "Numero: $numero", Toast.LENGTH_LONG).show()
 
         // colocar toolbar
-        var toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
 
         // alterar título da ActionBar
@@ -51,7 +51,6 @@ class TelaInicialActivity : DebugActivity(), NavigationView.OnNavigationItemSele
         configuraMenuLateral()
 
         // configurar cardview
-        recyclerDisciplinas = findViewById<RecyclerView>(R.id.recyclerDisciplinas)
         recyclerDisciplinas?.layoutManager = LinearLayoutManager(context)
         recyclerDisciplinas?.itemAnimator = DefaultItemAnimator()
         recyclerDisciplinas?.setHasFixedSize(true)
@@ -89,17 +88,13 @@ class TelaInicialActivity : DebugActivity(), NavigationView.OnNavigationItemSele
 
     // configuraçao do navigation Drawer com a toolbar
     private fun configuraMenuLateral() {
-        var toolbar = findViewById<Toolbar>(R.id.toolbar)
-        var menuLateral = findViewById<DrawerLayout>(R.id.layourMenuLateral)
-
         // ícone de menu (hamburger) para mostrar o menu
-        var toogle = ActionBarDrawerToggle(this, menuLateral, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+        var toogle = ActionBarDrawerToggle(this, layourMenuLateral, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
 
-        menuLateral.addDrawerListener(toogle)
+        layourMenuLateral.addDrawerListener(toogle)
         toogle.syncState()
 
-        val navigationView = findViewById<NavigationView>(R.id.menu_lateral)
-        navigationView.setNavigationItemSelectedListener(this)
+        menu_lateral.setNavigationItemSelectedListener(this)
     }
 
     // método que deve ser implementado quando a activity implementa a interface NavigationView.OnNavigationItemSelectedListener
@@ -128,8 +123,7 @@ class TelaInicialActivity : DebugActivity(), NavigationView.OnNavigationItemSele
         }
 
         // fecha menu depois de tratar o evento
-        val drawer = findViewById<DrawerLayout>(R.id.layourMenuLateral)
-        drawer.closeDrawer(GravityCompat.START)
+        layourMenuLateral.closeDrawer(GravityCompat.START)
         return true
     }
 
