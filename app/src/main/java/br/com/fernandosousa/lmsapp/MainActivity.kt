@@ -18,26 +18,19 @@ class MainActivity : DebugActivity() {
         setContentView(R.layout.login)
 
         // encontra objeto pelo id
-        val imagem = findViewById<ImageView>(R.id.campo_imagem)
-        imagem.setImageResource(R.drawable.imagem_login)
+        campo_imagem.setImageResource(R.drawable.imagem_login)
 
-        val texto = findViewById<TextView>(R.id.texto_login)
-        texto.text = getString(R.string.mensagem_login)
-
-
-        val botaoLogin = findViewById<Button>(R.id.botao_login)
+        texto_login.text = getString(R.string.mensagem_login)
 
         // evento no botao de login forma 1
-//        botaoLogin.setOnClickListener {
-//            val campoUsuario = findViewById<EditText>(R.id.campo_usuario)
-//            val campoSenha = findViewById<EditText>(R.id.campo_senha)
-//            val valorUsuario = campoUsuario.text.toString()
-//            val valorSenha = campoSenha.text.toString()
+//        botao_login.setOnClickListener {
+//            val valorUsuario = campo_usuario.text.toString()
+//            val valorSenha = campo_senha.text.toString()
 //            Toast.makeText(this, "$valorUsuario : $valorSenha", Toast.LENGTH_LONG).show()
 //        }
 
         // segunda forma: delegar para método
-        botaoLogin.setOnClickListener {onClickLogin() }
+        botao_login.setOnClickListener {onClickLogin() }
 
         progressBar.visibility = View.INVISIBLE
 
