@@ -1,7 +1,7 @@
 package br.com.fernandosousa.lmsapp
 
 import android.os.Bundle
-import android.support.v7.widget.Toolbar
+import androidx.appcompat.widget.Toolbar
 import android.widget.ImageView
 import android.widget.TextView
 import com.squareup.picasso.Picasso
