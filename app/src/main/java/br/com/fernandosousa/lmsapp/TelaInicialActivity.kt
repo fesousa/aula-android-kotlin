@@ -7,8 +7,8 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Button
-import android.support.v7.widget.SearchView
-import android.support.v7.widget.Toolbar
+import androidx.appcompat.widget.SearchView
+import androidx.appcompat.widget.Toolbar
 import android.widget.TextView
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_tela_inicial.*
@@ -61,7 +61,7 @@ class TelaInicialActivity : DebugActivity() {
         // infla o menu com os botões da ActionBar
         menuInflater.inflate(R.menu.menu_main, menu)
         // vincular evento de buscar
-        (menu?.findItem(R.id.action_buscar)?.actionView as SearchView).setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+        (menu?.findItem(R.id.action_buscar)?.actionView as SearchView?)?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
 
             override fun onQueryTextChange(newText: String): Boolean {
                 // ação enquanto está digitando
