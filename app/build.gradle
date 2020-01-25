@@ -40,11 +40,8 @@ dependencies {
     //OKHttp
     implementation 'com.squareup.okhttp3:okhttp:3.8.0'
     // Google Room - Banco de dados
-
-
     implementation "androidx.room:room-runtime:2.2.3"
     kapt "androidx.room:room-compiler:2.2.3"
-
     //implementation "androidx.room:room-ktx:2.2.3"
 
 
