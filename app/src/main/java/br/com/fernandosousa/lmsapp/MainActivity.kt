@@ -3,8 +3,9 @@ package br.com.fernandosousa.lmsapp
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.*
 import kotlinx.android.synthetic.main.login.*
@@ -43,10 +44,6 @@ class MainActivity : DebugActivity() {
             checkBoxLogin.isChecked = lembrar
 
         }
-
-
-
-
     }
 
     fun onClickLogin(){
@@ -89,5 +86,30 @@ class MainActivity : DebugActivity() {
             val result = data?.getStringExtra("result")
             Toast.makeText(context, "$result", Toast.LENGTH_LONG).show()
         }
+    }
+
+
+    override fun onResume() {
+        super.onResume()
+        // abrir a disciplina caso clique na notificação com o aplicativo fechado
+        abrirDisciplina()
+        // mostrar no log o tokem do firebase
+        Log.d("firebase", "Firebase Token: ${Prefs.getString("FB_TOKEN")}")
+    }
+
+    fun abrirDisciplina() {
+        // verificar se existe  id da disciplina na intent
+        if (intent.hasExtra("disciplinaId")) {
+            Thread {
+                var disciplinaId = intent.getStringExtra("disciplinaId")?.toLong()!!
+                val disciplina = DisciplinaService.getDisciplina(this, disciplinaId)
+                runOnUiThread {
+                    val intentDisciplina = Intent(this, DisciplinaActivity::class.java)
+                    intentDisciplina.putExtra("disciplina", disciplina)
+                    startActivity(intentDisciplina)
+                }
+            }.start()
+        }
+
     }
 }

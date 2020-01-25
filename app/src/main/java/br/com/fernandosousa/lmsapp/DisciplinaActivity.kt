@@ -2,11 +2,11 @@ package br.com.fernandosousa.lmsapp
 
 import android.content.Context
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v7.app.AlertDialog
-import android.support.v7.widget.SearchView
-import android.support.v7.widget.Toolbar
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.widget.SearchView
+import androidx.appcompat.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -26,7 +26,8 @@ class DisciplinaActivity : DebugActivity() {
         setContentView(R.layout.activity_disciplina)
 
         // recuperar onjeto de Disciplina da Intent
-        disciplina = intent.getSerializableExtra("disciplina") as Disciplina
+        if (intent.getSerializableExtra("disciplina") is Disciplina)
+            disciplina = intent.getSerializableExtra("disciplina") as Disciplina
 
         // configurar título com nome da Disciplina e botão de voltar da Toobar
         // colocar toolbar

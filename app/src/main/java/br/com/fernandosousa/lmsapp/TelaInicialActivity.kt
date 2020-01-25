@@ -4,14 +4,16 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.support.design.widget.NavigationView
-import android.support.v4.view.GravityCompat
-import android.support.v4.widget.DrawerLayout
-import android.support.v7.app.ActionBarDrawerToggle
-import android.support.v7.widget.*
+import com.google.android.material.navigation.NavigationView
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
+import androidx.appcompat.app.ActionBarDrawerToggle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_tela_inicial.*
 import kotlinx.android.synthetic.main.toolbar.*
 
@@ -67,8 +69,8 @@ class TelaInicialActivity : DebugActivity(), NavigationView.OnNavigationItemSele
 
 
     fun taskDisciplinas() {
-        // Criar a Thread
 
+        // Criar a Thread
         Thread {
             // Código para procurar as disciplinas
             // que será executado em segundo plano / Thread separada
@@ -76,6 +78,7 @@ class TelaInicialActivity : DebugActivity(), NavigationView.OnNavigationItemSele
             runOnUiThread {
                 // Código para atualizar a UI com a lista de disciplinas
                 recyclerDisciplinas?.adapter = DisciplinaAdapter(this.disciplinas) { onClickDisciplina(it) }
+                // enviar notificação
                 enviaNotificacao(this.disciplinas.get(0))
 
             }
@@ -84,9 +87,11 @@ class TelaInicialActivity : DebugActivity(), NavigationView.OnNavigationItemSele
     }
 
     fun enviaNotificacao(disciplina: Disciplina) {
-        NotificationUtil.createChannel(this)
+        // Intent para abrir tela quando clicar na notificação
         val intent = Intent(this, DisciplinaActivity::class.java)
+        // parâmetros extras
         intent.putExtra("disciplina", disciplina)
+        // Disparar notificação
         NotificationUtil.create(this, 1, intent, "LMSApp", "Você tem nova atividade na ${disciplina.nome}")
     }
 
