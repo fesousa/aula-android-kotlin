@@ -13,7 +13,7 @@ object DisciplinaService {
 
     //TROQUE PELA URL DE ONDE ESTÁ O WS
     // Veja um exemplo no repositório https://github.com/fesousa/aula-android-kotlin-api
-    val host = "https://fesousa.pythonanywhere.com"
+    val host = "https://urldoservico"
     val TAG = "WS_LMSApp"
 
     fun getDisciplinas (context: Context): List<Disciplina> {
