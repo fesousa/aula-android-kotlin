@@ -18,7 +18,7 @@ object DisciplinaService {
 
     fun getDisciplinas (context: Context): List<Disciplina> {
         var disciplinas = ArrayList<Disciplina>()
-        if (AndroidUtils.isInternetDisponivel(context)) {
+        if (AndroidUtils.isInternetDisponivel()) {
             val url = "$host/disciplinas"
             val json = HttpHelper.get(url)
             disciplinas = parserJson(json)
@@ -37,7 +37,7 @@ object DisciplinaService {
 
     fun getDisciplina (context: Context, id: Long): Disciplina? {
 
-        if (AndroidUtils.isInternetDisponivel(context)) {
+        if (AndroidUtils.isInternetDisponivel()) {
             val url = "$host/disciplinas/${id}"
             val json = HttpHelper.get(url)
             val disciplina = parserJson<Disciplina>(json)
@@ -52,8 +52,14 @@ object DisciplinaService {
     }
 
     fun save(disciplina: Disciplina): Response {
-        val json = HttpHelper.post("$host/disciplinas", disciplina.toJson())
-        return parserJson(json)
+        if (AndroidUtils.isInternetDisponivel()) {
+            val json = HttpHelper.post("$host/disciplinas", disciplina.toJson())
+            return parserJson(json)
+        }
+        else {
+            saveOffline(disciplina)
+            return Response("OK", "Disciplina salva no dispositivo")
+        }
     }
 
     fun saveOffline(disciplina: Disciplina) : Boolean {
@@ -73,7 +79,7 @@ object DisciplinaService {
     }
 
     fun delete(disciplina: Disciplina): Response {
-        if (AndroidUtils.isInternetDisponivel(LMSApplication.getInstance().applicationContext)) {
+        if (AndroidUtils.isInternetDisponivel()) {
             val url = "$host/disciplinas/${disciplina.id}"
             val json = HttpHelper.delete(url)
 

@@ -8,8 +8,8 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.opengl.Visibility
-import android.support.v4.app.NotificationCompat
-import android.support.v4.app.NotificationManagerCompat
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import android.view.View
 
 object NotificationUtil {

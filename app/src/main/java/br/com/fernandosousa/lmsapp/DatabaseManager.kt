@@ -1,6 +1,7 @@
 package br.com.fernandosousa.lmsapp
 
-import android.arch.persistence.room.Room
+import androidx.room.Room
+
 
 object DatabaseManager {
 
