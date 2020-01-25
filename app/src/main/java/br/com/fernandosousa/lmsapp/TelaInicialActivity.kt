@@ -105,6 +105,7 @@ class TelaInicialActivity : DebugActivity(), NavigationView.OnNavigationItemSele
 
     // configuraçao do navigation Drawer com a toolbar
     private fun configuraMenuLateral() {
+
         // ícone de menu (hamburger) para mostrar o menu
         var toogle = ActionBarDrawerToggle(this, layoutMenuLateral, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
 
