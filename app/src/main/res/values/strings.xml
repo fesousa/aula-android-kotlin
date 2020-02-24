@@ -10,4 +10,8 @@
 
     <string name="navigation_drawer_open">Open</string>
     <string name="navigation_drawer_close">Close</string>
+
+    <!-- KEY para Maps API-->
+    <string name="API_KEY">AIzaSyD_ZWzh8SUu_LYvjaH8wxq37EZGfBbBI3M</string>
+
 </resources>
